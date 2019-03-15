@@ -30,3 +30,19 @@ if(USE_CUDA)
     install(TARGETS benchmark_cuda DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
   endif()
 endif()
+
+if(USE_HIP)
+  set(GLOO_BENCHMARK_HIP_SRCS
+    "${HIPIFY_OUTPUT_DIR}/benchmark/hip_main.cc"
+    "${CMAKE_CURRENT_SOURCE_DIR}/options.cc"
+    "${CMAKE_CURRENT_SOURCE_DIR}/runner.cc"
+    )
+
+  set_source_files_properties(${GLOO_BENCHMARK_HIP_SRCS} PROPERTIES HIP_SOURCE_PROPERTY_FORMAT 1)
+  hip_add_executable(benchmark_hip ${GLOO_BENCHMARK_HIP_SRCS})
+  target_link_libraries(benchmark_hip gloo_builder)
+
+  if(GLOO_INSTALL)
+    install(TARGETS benchmark_hip DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
+  endif()
+endif()
