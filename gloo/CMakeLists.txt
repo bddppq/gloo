@@ -133,9 +133,10 @@ if(USE_HIP)
   set_source_files_properties(${GLOO_HIP_SRCS} PROPERTIES HIP_SOURCE_PROPERTY_FORMAT 1)
   hip_add_library(gloo_hip ${GLOO_HIP_SRCS} ${GLOO_STATIC_OR_SHARED})
   target_include_directories(gloo_hip PUBLIC ${GLOO_HIP_INCLUDE})
-  target_compile_options(gloo_hip PUBLIC ${HIP_CXX_FLAGS})
+  target_compile_options(gloo_hip PRIVATE ${HIP_CXX_FLAGS})
   target_link_libraries(gloo_hip gloo ${gloo_hip_DEPENDENCY_LIBS})
   target_link_libraries(gloo_builder PUBLIC gloo_hip)
+  target_compile_options(gloo_builder PRIVATE ${HIP_CXX_FLAGS})
 endif()
 
 # Add Interface include directories that are relocatable.

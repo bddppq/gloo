@@ -44,5 +44,6 @@ if(USE_HIP)
 
   set_source_files_properties(${GLOO_TEST_HIP_SRCS} PROPERTIES HIP_SOURCE_PROPERTY_FORMAT 1)
   hip_add_executable(gloo_test_hip ${GLOO_TEST_HIP_SRCS})
+  target_compile_options(gloo_test_hip PRIVATE ${HIP_CXX_FLAGS})
   target_link_libraries(gloo_test_hip gloo_hip gloo_builder gtest)
 endif()

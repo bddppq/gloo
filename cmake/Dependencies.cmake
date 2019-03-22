@@ -109,6 +109,8 @@ if(USE_HIP)
     # If you get this wrong, you'll get a complaint like 'ld: cannot find -lrocblas-targets'
     list(APPEND gloo_hip_DEPENDENCY_LIBS
       roc::rocblas roc::rocfft)
+
+    set(GLOO_HIP_INCLUDE ${GLOO_HIP_INCLUDE} PARENT_SCOPE)
   else(HAVE_HIP)
     message(WARNING "Not compiling with HIP support. Suppress this warning with -DUSE_HIP=OFF.")
     set(USE_HIP OFF)

@@ -40,6 +40,7 @@ if(USE_HIP)
 
   set_source_files_properties(${GLOO_BENCHMARK_HIP_SRCS} PROPERTIES HIP_SOURCE_PROPERTY_FORMAT 1)
   hip_add_executable(benchmark_hip ${GLOO_BENCHMARK_HIP_SRCS})
+  target_compile_options(benchmark_hip PRIVATE ${HIP_CXX_FLAGS})
   target_link_libraries(benchmark_hip gloo_builder)
 
   if(GLOO_INSTALL)
